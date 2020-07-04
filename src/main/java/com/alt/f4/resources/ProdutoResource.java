@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,7 @@ public class ProdutoResource {
 			@ApiResponse(code=500, message="Erro inesperado")
 	})
 	@RequestMapping(value="/foto", method=RequestMethod.POST)
+	@PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN') and #oauth2.hasScope('write')")
 	public ResponseEntity<?> uploadImagem(@RequestParam MultipartFile imagem) throws IOException{
 		
 		StringBuilder sb = new StringBuilder();
@@ -69,6 +71,7 @@ public class ProdutoResource {
 			@ApiResponse(code=500, message="Erro inesperado")
 	})
 	@RequestMapping(method=RequestMethod.POST)
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN') and #oauth2.hasScope('write')")
 	public ResponseEntity<?> salvarProduto(
 			@RequestBody @Valid Produto produto, 
 			HttpServletResponse response){
@@ -123,6 +126,7 @@ public class ProdutoResource {
 			@ApiResponse(code=500, message="Erro inesperado")
 	})
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN') and #oauth2.hasScope('write')")
 	public ResponseEntity<?> atualizarProdutp(@PathVariable("id") Long id, @RequestBody @Valid Produto produto){
 		Produto produtoSalvo = produtoService.atualizarProduto(id, produto);
 		return ResponseEntity.ok(produtoSalvo);
@@ -136,6 +140,7 @@ public class ProdutoResource {
 	})
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN') and #oauth2.hasScope('write')")
 	public void removerProduto(@PathVariable("id") Long id){
 		produtoRepository.deleteById(id);
 	}
