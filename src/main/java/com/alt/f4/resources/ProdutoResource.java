@@ -132,6 +132,12 @@ public class ProdutoResource {
 		return ResponseEntity.ok(produtoSalvo);
 	}
 	
+	@RequestMapping(value="/{id}/promocao", method=RequestMethod.PATCH)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void atualizarProdutoPromocao(@PathVariable("id") Long id, @RequestBody boolean promocao){
+		produtoService.atualizarProdutoPromocao(id, promocao);
+	}
+	
 	@ApiOperation(value="Remove um produto")
 	@ApiResponses(value= {
 			@ApiResponse(code=204, message="Retorno sem conteúdo"),

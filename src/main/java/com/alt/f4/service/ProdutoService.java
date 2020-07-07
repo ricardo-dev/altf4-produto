@@ -49,6 +49,12 @@ public class ProdutoService {
 		BeanUtils.copyProperties(produto, produtoSalvo, "id","medias");
 		return produtoRepository.save(produtoSalvo);
 	}
+	
+	public void atualizarProdutoPromocao(Long id, boolean promocao) {
+		Produto produtoSalvo = this.findProduto(id);
+		produtoSalvo.setPromocao(promocao);
+		produtoRepository.save(produtoSalvo);
+	}
 
 	private Produto findProduto(Long id) {
 		Produto produto = produtoRepository.findById(id)

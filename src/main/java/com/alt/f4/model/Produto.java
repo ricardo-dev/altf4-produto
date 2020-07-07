@@ -45,6 +45,8 @@ public class Produto {
 	@OneToMany(mappedBy="produto", 
 	    	cascade=CascadeType.REMOVE)
 	private List<Media> medias;
+	
+	private boolean promocao;
 
 	public Long getId() {
 		return id;
@@ -94,6 +96,14 @@ public class Produto {
 
 	public void setMedias(List<Media> medias) {
 		this.medias = medias;
+	}
+
+	public boolean isPromocao() {
+		return promocao;
+	}
+
+	public void setPromocao(boolean promocao) {
+		this.promocao = promocao;
 	}
 
 	@Override
