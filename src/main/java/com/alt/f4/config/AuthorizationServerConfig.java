@@ -47,6 +47,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 	
 	/*
+	 * security/usuario-sistema
+	 * security/app-user-details-service
+	 * config.token/custom-token-enhancer
+	 * config/oauth-security-config
+	 * config/resource-server-config
+	 * config/authorization-server-config
+	 */
+	
+	/*
 	 * .../oauth/token -> username={}&password={}&grant_type=password
 	 * 
 	 *  Para usar sem refresh token pelo cookie:
