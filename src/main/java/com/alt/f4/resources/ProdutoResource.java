@@ -107,6 +107,30 @@ public class ProdutoResource {
 		return ResponseEntity.ok(produtos);
 	}
 	
+	@ApiOperation(value="Recupera todos os produtos com filtro e paginacao")
+	@ApiResponses(value= {
+			@ApiResponse(code=200, message="Retorna uma pagina de produtos"),
+			@ApiResponse(code=500, message="Erro inesperado")
+	})
+	@RequestMapping(value="/nome", method=RequestMethod.GET)
+	public ResponseEntity<?> pegarTodosComNome(@RequestParam(required=false, defaultValue="") String nome){
+		//RequestParam(required=false, defaultValue="") String nome,
+		Produto produtos = produtoRepository.produtos(nome);
+		return ResponseEntity.ok(produtos);
+	}
+	
+	@ApiOperation(value="Recupera todos os produtos com filtro e paginacao")
+	@ApiResponses(value= {
+			@ApiResponse(code=200, message="Retorna uma pagina de produtos"),
+			@ApiResponse(code=500, message="Erro inesperado")
+	})
+	@RequestMapping(value="/nomes", method=RequestMethod.GET)
+	public ResponseEntity<?> pegarTodosComNomeLista(@RequestParam(required=false, defaultValue="") String nome){
+		//RequestParam(required=false, defaultValue="") String nome,
+		List<Produto> produtos = produtoRepository.produtosLista(nome);
+		return ResponseEntity.ok(produtos);
+	}
+	
 	@ApiOperation(value="Recupera os detalhes de um produto")
 	@ApiResponses(value= {
 			@ApiResponse(code=200, message="Retorna um produto salvo"),
