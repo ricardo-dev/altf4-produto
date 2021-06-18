@@ -76,6 +76,11 @@ public class ProdutoRepositoryImpl implements ProdutoRepositoryQuery{
 			predicates.add(
 				builder.lessThanOrEqualTo(root.get("preco"), filtro.getPrecoMax())
 			);
+			/*predicates.add(
+				builder.or(
+						builder.lessThanOrEqualTo(root.get("preco"), filtro.getPrecoMax()),
+						builder.lessThanOrEqualTo(root.get("preco"), filtro.getPrecoMax()))
+					);*/
 		}
 		/*
 		 * builder.equal(root.join("condomimiun").get("id"), filter.getCondominium()) // join - relacionamento
